@@ -4,19 +4,15 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator();
+export default function HistoryScreen({route}) {
 
-function HistoryScreen(route, navigation) {
-
-   const data = route.data;
-
-
+   const { history } = route.params;
     return (
       <View style={styles.container}>
 
         <Text style={styles.fixToText}>History</Text>
         <FlatList style={styles.list}
-          data={data}
+          data={history}
           keyExtractor= { (item, index) => index }
           renderItem={({ item }) =>
             <Text>{item.key}</Text>
@@ -48,5 +44,3 @@ function HistoryScreen(route, navigation) {
           marginRight: 100,
         }
       });
-
-  export default HistoryScreen;

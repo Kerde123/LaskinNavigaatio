@@ -5,16 +5,13 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HistoryScreen from './HistoryScreen';
 
-
-
-function CalculatorScreen({ navigation }) {
-
-    const Stack = createNativeStackNavigator();
+export default function CalculatorScreen({ navigation }) {
 
     const [number1, setNumber1] = useState('');
     const [number2, setNumber2] = useState('');
     const [result, setResult] = useState('');
     const [data, setData] = useState([]);
+    const [history, setHistory] = useState([]);
   
     const plusResult = parseInt(number1)+parseInt(number2);
     const minusResult = parseInt(number1)-parseInt(number2);
@@ -25,7 +22,7 @@ function CalculatorScreen({ navigation }) {
       setNumber2('');
   
       const text = number1 + "+" + number2 + "=" + plusResult;
-      setData([...data, { key: text }]);
+      setHistory([...history, { key: text }]);
     };
     
     const pressed2 = () => {
@@ -34,7 +31,7 @@ function CalculatorScreen({ navigation }) {
       setNumber2('');
   
       const text = number1 + "-" + number2 + "=" + minusResult;
-      setData([...data, { key: text }]);
+      setHistory([...history, { key: text }]);
     };
   
   
@@ -70,7 +67,7 @@ function CalculatorScreen({ navigation }) {
        <Button
           title="HISTORY"
           onPress = {() => navigation.navigate('History', 
-          {data: setData})}
+          { history})}
           />
       </View>
   
@@ -99,6 +96,4 @@ function CalculatorScreen({ navigation }) {
       marginRight: 100,
     }
   });
-
-  export default CalculatorScreen;
   
